@@ -23,7 +23,7 @@ of available languages. The subtitles for the selected language are downloaded, 
 and the track is selected as primary subtitles.
 
 ### Load subtitles automatically
-When issuing `alt+shift+y` (can also be set through the option `auto_load_autosub_binding`), the script loads the subtitles
+When issuing `alt+shift+y` (can also be set through the option `autoload_autosub_binding`), the script loads the subtitles
 for the original language of the video as primary subtitle track and the subtitles for a source
 language as secondary subtitle track. The source language can be set with the `source_lang` script
 option.

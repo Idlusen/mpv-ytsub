@@ -16,7 +16,7 @@ local https = want("ssl.https")
 local options = {
     source_lang = "fr",
     load_autosub_binding = "alt+y",
-    auto_load_autosub_binding = "alt+Y",
+    autoload_autosub_binding = "alt+Y",
 }
 require("mp.options").read_options(options)
 
@@ -144,4 +144,4 @@ local function ytsub(is_auto)
 end
 
 mp.add_key_binding(options.load_autosub_binding, function() ytsub(false) end)
-mp.add_key_binding(options.auto_load_autosub_binding, function() ytsub(true) end)
+mp.add_key_binding(options.autoload_autosub_binding, function() ytsub(true) end)
