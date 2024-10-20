@@ -20,15 +20,20 @@ Just copy `ytsub.lua` in your mpv scripts directory.
 ## Usage
 
 ### Load subtitles for a language selected interactively
-Hit `alt+y` (can be modified by the script option `load_autosub_binding`) to fire up the mpv console selector with the list
+Hit `alt+y` to fire up the mpv console selector with the list
 of available languages. The subtitles for the selected language are downloaded, added as a track
 and the track is selected as primary subtitles.
 
 ### Load subtitles automatically
-When issuing `alt+shift+y` (can also be set through the option `autoload_autosub_binding`), the script loads the subtitles
+When hitting `alt+shift+y`, the script loads the subtitles
 for the original language of the video as primary subtitle track and the subtitles for a source
-language as secondary subtitle track. The source language can be set with the `source_lang` script
-option.
+language as secondary subtitle track.
+
+## Options
+- `load_autosub_binding`: key binding used to select a language and load subtitles. See `mpv` manual for the key bindings syntax.
+- `autoload_autosub_binding`: key binding used to load subtitles with automatic language selection.
+- `source_lang`: the source language used when loading subtitles automatically. 2-letter code as used by Youtube.
+- `cache_dir`: path where the subtitles files are cached.
 
 ## `mpv` usage reminders
 To set a script option, use the `--scripts-opts` (see `man mpv`) command-line argument, that can also
