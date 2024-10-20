@@ -12,7 +12,8 @@ from the youtube URL.
 Alternatively, if either of these modules is missing, the script downloads the subtitles via `yt-dlp`.
 Note that the `yt-dlp` solution is a bit slower.
 
-For the time being should not work on systems other than Linux due to the method used to cache subs files.
+For the time being should not work by default on systems other than Linux due to the method used to cache subs files.
+Setting the `cache_dir` option might help but this is not tested.
 
 ## Installation
 Just copy `ytsub.lua` in your mpv scripts directory.
