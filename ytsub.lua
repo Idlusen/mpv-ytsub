@@ -69,14 +69,17 @@ local function load_autosub(lang, sub_info, ytid, is_primary)
             end
         else
             -- lua http modules not available, download via yt-dlp
-            mp.command_native({
-                name = "subprocess",
-                args = {"yt-dlp", "--skip-download", "--sub-lang", lang, "--write-auto-sub", "-o", subfile_base, ytid}
-            })
-            f = io.open(subfile, "r")
-            if f ~= nil then
-                io.close(f)
-                sub_is_available = true
+            local ytdl_path = mp.get_property_native('user-data/mpv/ytdl/path')
+            if ytdl_path ~= nil then
+                mp.command_native({
+                    name = "subprocess",
+                    args = {ytdl_path, "--skip-download", "--sub-lang", lang, "--write-auto-sub", "-o", subfile_base, ytid}
+                })
+                f = io.open(subfile, "r")
+                if f ~= nil then
+                    io.close(f)
+                    sub_is_available = true
+                end
             end
         end
     end
