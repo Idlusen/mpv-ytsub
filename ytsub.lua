@@ -17,8 +17,19 @@ local options = {
     source_lang = "fr",
     load_autosub_binding = "alt+y",
     autoload_autosub_binding = "alt+Y",
+    cache_dir = utils.join_path(os.getenv("HOME"), ".cache/ytsub/"),
 }
 require("mp.options").read_options(options)
+
+-- create cache directory for subtitles if it doesn't exist
+local res = utils.file_info(options.cache_dir)
+if not res or not res.is_dir then
+    mp.command_native({
+        name = "subprocess",
+        args = {"mkdir", options.cache_dir},
+        playback_only = false,
+    })
+end
 
 local function info(msg)
     mp.osd_message('ytsub : ' .. msg, 5)
@@ -36,7 +47,7 @@ local function load_autosub(lang, sub_info, ytid, is_primary)
 
     info('loading '..lang_name)
 
-    local subfile_base = "/tmp/ytautosub_" .. ytid -- for yt-dlp
+    local subfile_base = utils.join_path(options.cache_dir, ytid) -- for yt-dlp
     local subfile = subfile_base .. "." .. lang .. ".vtt"
 
     local f = io.open(subfile, "r")
