@@ -117,7 +117,7 @@ local function ytsub(is_auto)
 
     local j = utils.parse_json(ytdl_output['stdout'])
     local subs = j['automatic_captions']
-    if subs == nil then
+    if subs == nil or next(subs) == nil then
         info('no auto-subs found')
         return
     end
