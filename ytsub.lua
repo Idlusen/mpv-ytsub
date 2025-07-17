@@ -18,6 +18,7 @@ local options = {
     load_autosub_binding = "alt+y",
     autoload_autosub_binding = "alt+Y",
     cache_dir = utils.join_path(os.getenv("HOME"), ".cache/ytsub/"),
+    filter_sub_single_line = false,
 }
 require("mp.options").read_options(options)
 
@@ -33,6 +34,21 @@ end
 
 local function info(msg)
     mp.osd_message('ytsub : ' .. msg, 5)
+end
+
+local function filter_sub(path)
+    local lines = {}
+    for line in io.lines(path) do
+        table.insert(lines, line)
+    end
+    local out = io.open(path, "w")
+    for i,line in pairs(lines) do
+        if i < 5 or i % 8 == 5 or i % 8 == 7 or i % 8 == 0 then
+            out:write(line)
+            out:write("\n")
+        end
+        i = i + 1
+    end
 end
 
 local function load_autosub(lang, sub_info, ytid, is_primary)
@@ -81,6 +97,9 @@ local function load_autosub(lang, sub_info, ytid, is_primary)
                     sub_is_available = true
                 end
             end
+        end
+        if sub_is_available and options.filter_sub_single_line then
+            filter_sub(subfile)
         end
     end
 
