@@ -35,7 +35,7 @@ language as secondary subtitle track.
 - `autoload_autosub_binding`: key binding used to load subtitles with automatic language selection.
 - `source_lang`: the source language used when loading subtitles automatically. 2-letter code as used by Youtube.
 - `cache_dir`: path where the subtitles files are cached.
-- `filter_sub_single_line`: youtube subs repeat the same line from bottom to top over two following timestamps. This option removes the duplication in downloaded subs and the text then appears on a single line. Note that once in cache this option has no effect, delete the cached sub file if needed.
+- `filter_sub_single_line` (boolean, use `yes` or `no`): youtube subs repeat the same line from bottom to top over two following timestamps. This option removes the duplication in downloaded subs and the text then appears on a single line. Note that once in cache this option has no effect, delete the cached sub file if needed.
 
 ## `mpv` usage reminders
 To set a script option, use the `--scripts-opts` (see `man mpv`) command-line argument, that can also
