@@ -12,7 +12,7 @@ from the youtube URL.
 Alternatively, if either of these modules is missing, the script downloads the subtitles via `yt-dlp`.
 Note that the `yt-dlp` solution is a bit slower.
 
-Should work on Linux and Windows, not tested on MacOS.
+Should work on Linux and Windows, not tested on MacOS, BSDs or any other OS you can think of.
 
 ## Installation
 Just copy `ytsub.lua` in your mpv scripts directory.
