@@ -17,7 +17,7 @@ local options = {
     source_lang = "fr",
     load_autosub_binding = "alt+y",
     autoload_autosub_binding = "alt+Y",
-    cache_dir = utils.join_path(os.getenv("HOME"), ".cache/ytsub/"),
+    cache_dir = ".cache/ytsub/",
     filter_sub_single_line = false,
 }
 require("mp.options").read_options(options)
@@ -25,11 +25,30 @@ require("mp.options").read_options(options)
 -- create cache directory for subtitles if it doesn't exist
 local res = utils.file_info(options.cache_dir)
 if not res or not res.is_dir then
-    mp.command_native({
-        name = "subprocess",
-        args = {"mkdir", options.cache_dir},
-        playback_only = false,
-    })
+    local command
+    local platform = mp.get_property_native("platform") or "unknown"
+
+    if string.find(platform, "win") then
+        -- This is Windows
+        -- Convert path to use backslashes and run via cmd.exe
+        options.cache_dir = utils.join_path(os.getenv("USERPROFILE"), options.cache_dir)
+        options.cache_dir = string.gsub(options.cache_dir, "/", "\\")
+        command = {
+            name = "subprocess",
+            args = {"cmd", "/c", "mkdir", options.cache_dir},
+            playback_only = false,
+        }
+    else
+        -- This is likely Linux, macOS, or another Unix-like system
+        -- Use mkdir -p to create parent directories if they don't exist
+        options.cache_dir =  utils.join_path(os.getenv("HOME"), options.cache_dir)
+        command = {
+            name = "subprocess",
+            args = {"mkdir", "-p", options.cache_dir},
+            playback_only = false,
+        }
+    end
+    mp.command_native(command)
 end
 
 local function info(msg)
