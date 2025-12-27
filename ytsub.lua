@@ -35,7 +35,7 @@ if not res or not res.is_dir then
         options.cache_dir = string.gsub(options.cache_dir, "/", "\\")
         command = {
             name = "subprocess",
-            args = {"cmd", "/c", "mkdir", options.cache_dir},
+            args = {"cmd", "/c", "if not exist", options.cache_dir, "mkdir", options.cache_dir},
             playback_only = false,
         }
     else
