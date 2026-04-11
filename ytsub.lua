@@ -76,11 +76,18 @@ end
 local function load_autosub(lang, sub_info, ytid, is_primary)
     local lang_name
     local url
-    for _,v in pairs(sub_info) do
-        lang_name = v["name"]
-        if v["ext"] == "vtt" then
-            url = v["url"]
+
+    if sub_info ~= nil then
+        for _,v in pairs(sub_info) do
+            lang_name = v["name"]
+            if v["ext"] == "vtt" then
+                url = v["url"]
+            end
         end
+    end
+    if lang_name == nil or url == nil then
+        info('could not get lang name or url from sub info')
+        return
     end
 
     info('loading '..lang_name)
