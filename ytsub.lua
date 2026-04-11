@@ -3,8 +3,8 @@ local function want(name)
   local out; if xpcall(
       function()  out = require(name) end,
       function(e) out = e end)
-  then return out          -- success                                     
-  else return nil, out end -- error                                       
+  then return out          -- success
+  else return nil, out end -- error
 end
 
 local utils = require('mp.utils')
@@ -61,12 +61,14 @@ local function filter_sub(path)
         table.insert(lines, line)
     end
     local out = io.open(path, "w")
-    for i,line in pairs(lines) do
-        if i < 5 or i % 8 == 5 or i % 8 == 7 or i % 8 == 0 then
-            out:write(line)
-            out:write("\n")
+    if out ~= nil then
+        for i,line in pairs(lines) do
+            if i < 5 or i % 8 == 5 or i % 8 == 7 or i % 8 == 0 then
+                out:write(line)
+                out:write("\n")
+            end
+            i = i + 1
         end
-        i = i + 1
     end
 end
 
@@ -95,15 +97,16 @@ local function load_autosub(lang, sub_info, ytid, is_primary)
         -- sub file not already present, download
         if http ~= nil and https ~= nil then
             -- downloading via direct url
-            local body, _ = http.request(url)
-            if body ~= nil then
+            local body, status = http.request(url)
+            if body ~= nil and status == 200 then
                 f = assert(io.open(subfile, 'wb'))
                 f:write(body)
                 f:close()
                 sub_is_available = true
             end
-        else
-            -- lua http modules not available, download via yt-dlp
+        end
+        if not sub_is_available then
+            -- lua http modules not available or download failed, download via yt-dlp
             local ytdl_path = mp.get_property_native('user-data/mpv/ytdl/path')
             if ytdl_path ~= nil then
                 mp.command_native({
@@ -122,7 +125,7 @@ local function load_autosub(lang, sub_info, ytid, is_primary)
         end
     end
 
-    -- load the subtitle file as track ans select it
+    -- load the subtitle file as track and select it
     if sub_is_available then
         if is_primary then
             mp.command("sub-add " .. subfile .. " select 'youtube auto-sub' '" .. lang .. "'")
