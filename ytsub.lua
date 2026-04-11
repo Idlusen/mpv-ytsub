@@ -52,6 +52,7 @@ if not res or not res.is_dir then
 end
 
 local function info(msg)
+    print(msg)
     mp.osd_message('ytsub : ' .. msg, 5)
 end
 
