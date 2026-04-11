@@ -14,7 +14,7 @@ local http = want("socket.http")
 local https = want("ssl.https")
 
 local options = {
-    source_lang = "fr",
+    source_lang = nil, -- en fr es de and the like
     load_autosub_binding = "alt+y",
     autoload_autosub_binding = "alt+Y",
     cache_dir = ".cache/ytsub/",
@@ -185,10 +185,12 @@ local function ytsub(is_auto)
         end
 
         load_autosub(orig_lang, subs[orig_lang], j["id"], true)
-        if orig_lang == source_lang.."-orig" then
-            info("source language and original language are the same ("..source_lang..")")
-        else
-            load_autosub(source_lang, subs[source_lang], j["id"], false)
+        if source_lang ~= nil then
+            if orig_lang == source_lang.."-orig" then
+                info("source language and original language are the same ("..source_lang..")")
+            else
+                load_autosub(source_lang, subs[source_lang], j["id"], false)
+            end
         end
 
     else
