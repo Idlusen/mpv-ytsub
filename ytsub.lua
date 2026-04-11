@@ -111,7 +111,7 @@ local function load_autosub(lang, sub_info, ytid, is_primary)
             if ytdl_path ~= nil then
                 mp.command_native({
                     name = "subprocess",
-                    args = {ytdl_path, "--skip-download", "--sub-lang", lang, "--write-auto-sub", "-o", subfile_base, ytid}
+                    args = {ytdl_path, "--skip-download", "--sub-lang", lang, "--write-auto-sub", "-o", subfile_base, "--", ytid}
                 })
                 f = io.open(subfile, "r")
                 if f ~= nil then
