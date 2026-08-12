@@ -12,6 +12,8 @@ from the youtube URL.
 Alternatively, if either of these modules is missing, the script downloads the subtitles via `yt-dlp`.
 Note that the `yt-dlp` solution is a bit slower.
 
+Needs `mpv>=0.38` as the script uses `mp.input`.
+
 Should work on Linux and Windows, not tested on MacOS, BSDs or any other OS you can think of.
 
 ## Installation
