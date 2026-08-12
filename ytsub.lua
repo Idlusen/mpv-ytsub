@@ -14,7 +14,7 @@ local http = want("socket.http")
 local https = want("ssl.https")
 
 local options = {
-    source_lang = nil, -- en fr es de and the like
+    source_lang = 'en', -- en fr es de and the like
     load_autosub_binding = "alt+y",
     autoload_autosub_binding = "alt+Y",
     cache_dir = ".cache/ytsub/",
