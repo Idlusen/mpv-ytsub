@@ -27,7 +27,7 @@ and the track is selected as primary subtitles.
 ### Load subtitles automatically
 When hitting `alt+shift+y`, the script loads the subtitles
 for the original language of the video as primary subtitle track and the subtitles for a source
-language as secondary subtitle track if one is defined.
+language as secondary subtitle track. The default source language is `en` (English).
 
 ## Options
 - `load_autosub_binding`: key binding used to select a language and load subtitles. See `mpv` manual for the key bindings syntax.
