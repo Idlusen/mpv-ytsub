@@ -208,5 +208,5 @@ local function ytsub(is_auto)
     end
 end
 
-mp.add_key_binding(options.load_autosub_binding, function() ytsub(false) end)
-mp.add_key_binding(options.autoload_autosub_binding, function() ytsub(true) end)
+mp.add_key_binding(options.load_autosub_binding, "load_autosub_binding", function() ytsub(false) end)
+mp.add_key_binding(options.autoload_autosub_binding, "autoload_autosub_binding", function() ytsub(true) end)
