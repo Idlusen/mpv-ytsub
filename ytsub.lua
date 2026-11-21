@@ -28,7 +28,7 @@ if not res or not res.is_dir then
     local command
     local platform = mp.get_property_native("platform") or "unknown"
 
-    if string.find(platform, "win") then
+    if platform == "windows" or platform == "cygwin" then
         -- This is Windows
         -- Convert path to use backslashes and run via cmd.exe
         options.cache_dir = utils.join_path(os.getenv("USERPROFILE"), options.cache_dir)
