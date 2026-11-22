@@ -70,6 +70,7 @@ local function filter_sub(path)
             end
             i = i + 1
         end
+        out:close()
     end
 end
 
